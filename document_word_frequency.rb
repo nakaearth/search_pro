@@ -6,10 +6,12 @@ class DocumentWordFrequency
 
   def calucate_frequency(documents, word)
     tf = tf(documents, word)
-   idf =  idf(documents, word)
+    idf =  idf(documents, word)
+    p "====================="
+    p "word: #{word}"
     p "tf: #{tf}"
     p "idf: #{idf}"
-    p "特徴値: #{tf * idf}"
+    p "#{word}の特徴値: #{tf * idf}"
   end
 
   private
