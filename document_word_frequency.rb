@@ -17,18 +17,16 @@ class DocumentWordFrequency
   private
 
   def tf(documents, word)
-    # documents中に wordが幾つある？
     word_tokenizer = WordTokenize.new
     documents.each do |document_txt|
       word_tokenizer.tokenize(document_txt)
     end
-    # 各wordがdocumentsの中に何個含まれているかをHash形式にする
-    # word_tokenizer.nouns.group_by(&:itself).map{ |key value| [key, value.count] }.to_h
-    word_tokenizer.nouns.count(word)
+
+    word_tokenizer.nouns.count(word) / word_tokenizer.nouns.count.to_f
+
   end
 
   def idf(documents, word)
-    # documentsの中にwordを含めたdocumentが幾つかるか
     df = 0
     documents.each do |document_txt|
       word_tokenizer = WordTokenize.new
@@ -41,6 +39,6 @@ class DocumentWordFrequency
     return 0 if df == 0
 
     # wordが何本の文書にあるたか
-    Math.log(documents.size/df.to_f)
+    Math.log(documents.size/df.to_f, 2)
   end
 end
